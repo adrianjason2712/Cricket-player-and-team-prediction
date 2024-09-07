@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to right, #fbfbfd, #45a049); /* Gradient background */
+        }
+        header {
+            
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+        }
+        .result-container {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: rgba(69, 160, 73, 0.4); /* Green with 40% opacity */
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        footer {
+            background-color: #e0ffcd;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Prediction Results</h1>
+    </header>
+    <div class="result-container">
+        <h2>Top {{ num_players }} Players</h2>
+        {% for team in teams %}
+        <h3>Team {{ loop.index }}:</h3>
+        <ul>
+            {% for player in team %}
+            <li>{{ player }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+
+        <h2>Metrics</h2>
+        <p>Accuracy: {{ accuracy }}</p>
+        <p>Precision: {{ precision }}</p>
+        <p>Recall: {{ recall }}</p>
+        <p>F1 Score: {{ f1 }}</p>
+
+        <h2>Classification Report</h2>
+        {{ metrics_df|safe }}
+
+    </div>
+    <footer>
+        <p>&copy; 2024 CrickPred App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

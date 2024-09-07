@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Player and Team Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #fbfbfd, #45a049); /* Gradient background */
+        }
+        header {
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            top: 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .left-container {
+            width: 40%; /* Container for background image */
+            height: 75vh;
+            position: relative;
+            overflow: hidden; /* Ensures the image doesn't overflow */
+        }
+        .left-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{{ url_for('static', filename='images/4.jpeg') }}') no-repeat center center;
+            background-size: cover;
+            mix-blend-mode: multiply; /* Blend the image with the container's background */
+            z-index: 1;
+        }
+
+        /* Form container with perspective for 3D effect */
+        .form-container {
+            width: 60%; /* Form on the right */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            z-index: 2; /* Ensure the form is above the image */
+            perspective: 1000px; /* Needed for the 3D effect */
+        }
+        .form-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+       
+        .form-container:hover .form-box {
+            transform: rotateY(10deg) rotateX(10deg) scale(1.05); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .form-box h2 {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.5em;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #e0ffcd;
+            padding: 10px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Cricket Team and Player Prediction</h1>
+    </header>
+
+    <div class="left-container"></div>
+
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Enter Number of Players</h2>
+            <form action="/predict" method="post">
+                <div class="input-section">
+                    <input type="number" name="num_players" min="1" placeholder="Enter only multiples of 11" required>
+                </div>
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CrickPred App. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
